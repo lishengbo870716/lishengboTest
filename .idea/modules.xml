@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springCloud_parent.iml" filepath="$PROJECT_DIR$/springCloud_parent/springCloud_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud01_eureka_server/springcloud01_eureka_server.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud01_eureka_server/springcloud01_eureka_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud02_eureka_client/springcloud02_eureka_client.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud02_eureka_client/springcloud02_eureka_client.iml" />
     </modules>
   </component>
 </project>
