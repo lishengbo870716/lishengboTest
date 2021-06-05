@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bobocai</groupId>
+    <artifactId>springCloud_parent</artifactId>
+    <version>1.0-RELEASE</version>
+
+
+
+    <!--继承springboot的父项目，注意集成springcloud的版本会限制sprigboot 的版本-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+    </parent>
+    <!--自定义properties属性-->
+    <properties>
+        <spring.cloud-version>Hoxton.SR6</spring.cloud-version>
+    </properties>
+
+
+    <!--维护版本springcloud版本，这里的东西不会导入包-->
+    <dependencyManagement>
+        <dependencies>
+
+            <!--维护版本springcloud版本-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+</project>
