@@ -1,5 +1,11 @@
 file--》new project-->空项目（empty project）--》直接下一步fish完成
 file--》new module--》maven（其他都不选择创建空项目）---》剩下的就是创建普通maven项目步骤---》这是springcloud 的父级项目制作规则配置（版本号不做其他的，创建好后可以直接将src干掉）
+
+引依赖
+写配置
+加注解
+
+
 1、搭建springcloud父项目
     1.1、自定义properties属性
         <properties>
@@ -26,4 +32,20 @@ file--》new module--》maven（其他都不选择创建空项目）---》剩下
         2.2.1、所有微服务信息的存储、如ip，端口，名称等。
         2.2.2、可以通过微服务调用时通过服务发现查询可用的微服务列表及网络地址的调用
         2.2.3、可以对所有微服务的进行心跳检测，如发现调用较长时间未响应，就会从服务列表移除该实例
-    2.3、测试
+    2.3、常用注册中心：eureka（最初netflix）、zookeepper(java)、consul(谷歌 GO语言)、nacos（阿里基于java）
+    2.4、简介eureka是netflix公司的产品， 后背spring-cloud-netflix-eureka封装
+        eureka包括两部分，eureka server 和 eureka client
+    2.5、eureka  server的开发
+        创建子项目springboot项目
+        引eureka server依赖
+        写配置，eureka server默认端口为8761
+            #eureka server默认的端口号为8761
+            server.port=8761
+            #注册的服务服务名称---以后微服务必须有服务名称，不区分大小写，不准有下划线，建议大写，以为注册上以后展示都是大写
+            spring.application.name=eurekaServer
+            #指定服务注册中心位置
+            eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+        人口类加注解
+            @EnableEurekaServer
+    2.6、注意开发细节
+3、注册中心客户端的开发（正常情况下每一个服务都相当于一个客户端）

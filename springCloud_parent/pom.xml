@@ -6,8 +6,11 @@
 
     <groupId>com.bobocai</groupId>
     <artifactId>springCloud_parent</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-RELEASE</version>
-
+    <modules>
+        <module>springcloud01_eureka_server</module>
+    </modules>
 
 
     <!--继承springboot的父项目，注意集成springcloud的版本会限制sprigboot 的版本-->
