@@ -11,6 +11,10 @@
     <modules>
         <module>springcloud01_eureka_server</module>
         <module>springcloud02_eureka_client</module>
+        <module>springcloud030_consul_user</module>
+        <module>springcloud040_consul_order</module>
+        <module>springcloud031_counsul_user</module>
+        <module>springcloud042_consul_order</module>
     </modules>
 
 
