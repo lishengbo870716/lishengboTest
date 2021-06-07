@@ -9,6 +9,6 @@ public class OrderController {
     @RequestMapping(value = "gitOrder")
     public String gitOrder(){
         System.out.println("进入订单");
-        return "进入订单";
+        return "进入订单端口为：8041";
     }
 }

@@ -26,7 +26,7 @@ file--》new module--》maven（其他都不选择创建空项目）---》剩下
                     <artifactId>spring-boot-starter-parent</artifactId>
                     <version>2.2.5.RELEASE</version>
                 </parent>
-eureka注册中心
+eureka（最初的netflix公司产品）注册中心
     2、添加第一个组件（注册中心）
         2.1、定义：所谓的注册中心就是整个微服务架构中单独提出一个服务，这个服务不完成系统的任何业务逻辑的处理，仅仅完成整个微服务的注册和发现，以及对服务状态的监控和管理功能
         2.2、
@@ -64,3 +64,32 @@ eureka注册中心
         加注解
             @EnableEurekaClient
         eureka的自我保护机制
+consul（谷歌go语言开发）服务注册中心
+    1、官方下载解压
+    2、cmd窗口运行启动
+        2.1、启动命令：consul agent -dev    生产环境需要 -server 生产环境的话必须需要集群才可以使用-server启动，-dev可以单击使用
+    3、访问ui界面：默认端口是8500，localhost:8500
+    4、客户端开发
+        依赖（依赖有两个，一个启动依赖、一个健康检测依赖）、配置地址、加注解
+微服务只见的通信问题：RestTemplate
+    http rest 方式  httpx 协议调用
+    Rpc  方式   远程过程调用    二进制
+    OSI  方式    物理层  数据链层  网络层  传输层（RPC）  会话层  表示层  应用层（http）
+    double架构：使用的是   传输层（RPC） 传输相对来说要快
+    spring架构：传输使用的是  应用层（http），
+ribbon负载均衡客户端组件，是基于netflix的组件进行封装的组件
+    ribbo只做负载不做调用，客户端的负载均衡
+    1、原理：ribbon通过服务名去注册中心consul获取调用地址，缓存到本地，然后按照对应的规则去调用真正的服务，
+    同时还有安全监控（服务跟注册中心保持心跳，一旦出现宕机，注册中心就会通知ribbon），如果某一个服务挂掉恰巧调用到该服务，那只能是失败
+    2、在consul的依赖中已经引入了ribbon的依赖包，所以无需再次引入
+    3、ribbon策略：
+        RoundRobinRule：轮训、
+        RandomeRule：随机
+        AvailabilityFilteringRule（可用于过滤）：先过滤多次访问故障而处于断路器的服务，还有并发数量超过阈值的服务
+        WeightedResponseTimeRule（响应时间甲权重）：根据平均返回时间计算权重，相应时间越快权重越大，刚启动默认轮训
+        RetryRule（重试策略）:先按照轮训策略，如果获取失败则进行重试获取服务
+        BestAvailableRule（最低分配策略）：会过滤掉由于多次访问故障而处于跳闸状态的服务，然后选择一个并发量最小的服务
+
+openFeign组件
+
+
