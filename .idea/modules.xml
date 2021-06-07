@@ -5,6 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springCloud_parent.iml" filepath="$PROJECT_DIR$/springCloud_parent/springCloud_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud01_eureka_server/springcloud01_eureka_server.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud01_eureka_server/springcloud01_eureka_server.iml" />
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud02_eureka_client/springcloud02_eureka_client.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud02_eureka_client/springcloud02_eureka_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud030_consul_user/springcloud030_consul_user.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud030_consul_user/springcloud030_consul_user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud031_counsul_user/springcloud031_counsul_user.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud031_counsul_user/springcloud031_counsul_user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud040_consul_order/springcloud040_consul_order.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud040_consul_order/springcloud040_consul_order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud042_consul_order/springcloud042_consul_order.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud042_consul_order/springcloud042_consul_order.iml" />
     </modules>
   </component>
 </project>
