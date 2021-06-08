@@ -12,6 +12,13 @@
     <artifactId>springcloud042_consul_order</artifactId>
 
     <dependencies>
+        <!--本地公共依赖-->
+        <dependency>
+            <groupId>com.bobocai</groupId>
+            <artifactId>springcloud_common</artifactId>
+            <version>1.0-RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
         <!--引入springboot依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -27,6 +34,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
 
 
     </dependencies>

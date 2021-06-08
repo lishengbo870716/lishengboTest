@@ -1,5 +1,7 @@
 package com.bobocai.controller;
 
+import com.bobocai.feignClient.OrderClient;
+import com.bobocai.vo.OrderVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +9,20 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "")
 public class UserController {
 
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final static Logger log = LoggerFactory.getLogger(UserController.class);
+
 
     @Autowired  //服务注册与发现服务对象
     private DiscoveryClient discoveryClient;
@@ -26,6 +31,15 @@ public class UserController {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    OrderClient orderClient;
+
+
+    /**
+     * 1、通过RestTemplate调用服务
+     * 2、通过RestTemplate+Ribbon负载通过consul获取服务对象进行调用服务
+     * @return
+     */
     @RequestMapping(value = "user")
     public String gitUser(){
         System.out.println("进入user方法");
@@ -60,4 +74,22 @@ public class UserController {
         String forObject = restTemplate.getForObject("http://ORDERSERVICE/gitOrder", String.class);
         return forObject;
     }
+
+    /**
+     * 通过OenFeign调用服务
+     * @return
+     */
+    @GetMapping("getOpenFeign")
+    public String getOpenFeign(){
+        log.info("进入OpenFeige调用");
+//        String s = orderClient.gitOrder();
+
+//        String s = orderClient.queryStringPath("张三", 99);
+
+        String s = orderClient.queryStringVo(new OrderVo(123, "李四", 88, new Date()));
+
+
+        return "返回数据为："+s;
+    }
+
 }

@@ -15,6 +15,7 @@
         <module>springcloud040_consul_order</module>
         <module>springcloud031_counsul_user</module>
         <module>springcloud042_consul_order</module>
+        <module>springcloud_common</module>
     </modules>
 
 
