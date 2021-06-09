@@ -1,8 +1,12 @@
 package com.bobocai.controller;
 
 import com.bobocai.vo.OrderVo;
+import com.bobocai.vo.TestListVo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "")
@@ -30,5 +34,16 @@ public class OrderController {
     @PostMapping("queryStringVo")
     public String queryStringVo(@RequestBody OrderVo order){
         return order.toString()+"\n对应的端口是："+post;
+    }
+
+    @PostMapping("getTestListVo")
+    public TestListVo getTestListVo(TestListVo testListVo){
+        System.out.println("进入："+post);
+        testListVo.setName("李四");
+        List<String> list = new ArrayList<>();
+        list.add("4");
+        list.add("5");
+        testListVo.setList(list);
+        return testListVo;
     }
 }

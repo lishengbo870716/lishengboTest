@@ -1,12 +1,11 @@
 package com.bobocai.feignClient;
 
-import com.bobocai.feignClient.Impl.OrderClientImpl;
 import com.bobocai.vo.OrderVo;
 import com.bobocai.vo.TestListVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(value = "ORDERSERVICE",fallback = OrderClientImpl.class)//指定这是openfeign的哪一个服务调用，
+@FeignClient(value = "ORDERSERVICE",qualifier="orderClient")//打开
 public interface OrderClient {
 
     //这个方法需要跟提供服务的方法名保持一直

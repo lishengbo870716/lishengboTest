@@ -4,8 +4,6 @@ file--》new module--》maven（其他都不选择创建空项目）---》剩下
 引依赖
 写配置
 加注解
-
-
     1、搭建springcloud父项目
         1.1、自定义properties属性
             <properties>
@@ -105,5 +103,58 @@ openFeign组件,相当于restClient服务调用，相当于一个http的伪客�
             logging.level.com.springboot.dao=debug
             #feign调用指定的日志级别 none（不展示调用日志）、basic（只展示url、端口、相应状态以及执行时间）、headers（在basic的基础上又增加了响应头的）、full（记录请求相应的header、body和元数据）
             feign.client.config.ORDERSERVICE.loggerLevel=full
-
+hystrix服务熔断组件---熔断是系统操作（框架处理），降级是人为干预的------netfile旗下的组件
+    服务雪崩：是指集群环境由于某一个服务出现故障导致连锁反应，使整个集群无法正常运行的现象，就是服务雪崩
+    第一、服务熔断
+        1、作用：防止服务雪崩现象的出现
+        2、熔断机制：所有需要监控的项目都必须引入hystrix组件
+        3、什么时候会触发熔断器
+            3.1、10秒内20个请求全部出错
+            3.2、10秒内超出50%的调用失败也会出发熔断机制
+        4、触发断路器后什么时候自动关闭
+            4.1、断路器打开后5秒后会半开，放行一个访问进行试探调用，成功则关闭断路器，失败则继续开启断路器，进入一个循环5秒在试探
+    第二、服务降级
+        服务熔断是服务降级的一种展现形式
+        定义：服务压力剧增的时候，根据一些页面有策略的进行服务降级，以此缓解服务的压力，以保证保证部分核心任务的运行，同时保证部分或者大部分的客户可以得到相应。也就是当前应用出错给一个默认的返回
+    第三、加入集群
+        因为openfeign已经集成了hystrix组件，直接在配置上开启hystrix即可
+        #开启openfeigm中的hystrix熔断机制
+        feign.hystrix.enabled=true
+    第四、开发
+        1、加注解@FeignClient(value = "ORDERSERVICE",fallback = OrderClientImpl.class)//指定这是openfeign的哪一个服务调、fallback指定调用失败走哪一个实现类
+        开发调用失败的默认的返回类，返回类需要实现openfeign对应的接口
+    第五、UI展示DashBoard
+        加依赖
+            <!--增加hystrix Dashboard依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+            </dependency>
+        加配置
+        加注解
+            @EnableHystrixDashboard//开启hystrix的Dashboard组件主要就是ui展示，各组件状态是否正常
+        访问：
+            监控的url：https://localhost:8041/actuator/hystrix.stream   格式：域名+/actuator/hystrix.stream
+            监控的多久刷新一次：Delay:
+            给监控设置一个名称：title
+        bug：本身hystrix dashboard是存在bug的，
+            bug1：
+                监控缺失对应的监控地址信息
+            解决办法：
+                在需要监控的项目中增加一个bean信息
+                @Bean
+                public ServletRegistrationBean getServlet(){
+                    HystrixMetricsStreamServlet st = new HystrixMetricsStreamServlet();
+                    ServletRegistrationBean rs = new ServletRegistrationBean(st);
+                    rs.setLoadOnStartup(1);
+                    rs.addUrlMappings("/hystrix.stream");
+                    rs.setName("HystrixMetricsStreamServlet");
+                    return rs;
+                }
+            bug2：
+                前端js报错，是因为jquery以前版本的的load方法已经不存在了，
+            解决办法：
+                通过页面报错找到对应的html文件
+                    将$(window).load(function修改为$(window).on("load",function
+                    一共有两个地方，修改完成即可
 

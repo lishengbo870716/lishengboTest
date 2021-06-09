@@ -9,22 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springcloud031_counsul_user</artifactId>
+    <artifactId>springcloud05_hystrix_ui</artifactId>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.bobocai</groupId>
-            <artifactId>springcloud_common</artifactId>
-            <version>1.0-RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!--引入springboot依赖-->
+        <!--springboot启动器组件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <!--引入consul依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -35,12 +28,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
-        <!--增加openfeign依赖-->
+        <!--增加hystrix Dashboard依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
         </dependency>
+
+
     </dependencies>
 
 
