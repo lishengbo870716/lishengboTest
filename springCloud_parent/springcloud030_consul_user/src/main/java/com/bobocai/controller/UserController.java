@@ -1,7 +1,6 @@
 package com.bobocai.controller;
 
 import com.bobocai.feignClient.OrderClient;
-import com.bobocai.vo.OrderVo;
 import com.bobocai.vo.TestListVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +9,12 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Date;
 
 @RestController//这个注解同controller注解一样，只不过RestController相当于给每一个方法上都增加了一个@ResponseBody注解将结果直接以字符串的形式返回了
-@RequestMapping(value = "")
+@RequestMapping(value = "user")
 public class UserController {
 
     private final static Logger log = LoggerFactory.getLogger(UserController.class);
@@ -91,6 +88,10 @@ public class UserController {
         TestListVo testListVo1 = orderClient.getTestListVo(testListVo);
 //        log.info(testListVo1.toString());
         return "返回数据为："+testListVo1.toString();
+    }
+    @GetMapping("")
+    public String test(){
+        return "测试，无路径访问0";
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "order")
 public class OrderController {
 
     @Value("${server.port}")

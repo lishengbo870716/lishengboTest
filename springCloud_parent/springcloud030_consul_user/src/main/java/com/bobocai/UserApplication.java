@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication //springboot启动注解
 @EnableDiscoveryClient//开启服务注册，consul的注解---这是一个spring提供的通用注册使用的注解，
@@ -14,4 +16,5 @@ public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class);
     }
+
 }

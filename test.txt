@@ -157,4 +157,50 @@ hystrix服务熔断组件---熔断是系统操作（框架处理），降级是�
                 通过页面报错找到对应的html文件
                     将$(window).load(function修改为$(window).on("load",function
                     一共有两个地方，修改完成即可
+gateway网关组件
+    主要功能：动态路由、服务的统一管理、请求过滤。也可以概括为两个方面（路由转发（router）+请求过滤（filter））
+    需要独立的项目来支持网关的操作
+    路由转发可以通过两种方式来实现，配置文件 与 java代码实现
+     转发：
+        1、配置文件的方式实现
+            spring:
+                gateway:
+                     routes:
+                            - id: user_router #这代表路由对象的唯一标识
+                              uri: http://localhost:8031 #这块代表访问的真正的ip地址,这个配置user用户项目的
+                              predicates:
+                                - Path=/user/**
+
+                            - id: order_router #这代表路由对象的唯一标识
+                              uri: http://localhost:8041 #这块代表访问的真正的ip地址,这个配置order订单项目的
+                              predicates:
+                                - Path=/order/**
+        2、java代码实现
+            @Configuration
+            public class GateWayConfig {
+                @Bean
+                public RouteLocator getRouter(RouteLocatorBuilder builder){
+                    return builder.routes()
+                            .route("user_router",r->r.path("/user/**").uri("http://localhost:8031"))//配置user对象的访问规则,
+                            .route("order_rouer",r->r.path("/order/**").uri("http://localhost:8041"))//配置order对象的访问规则,
+                            .build();//
+                }
+            }
+    path路径支持以逗号相隔多个路径，解析规则为直接将路径加在转发的地址后面即可，而且支持通配符的设置
+    负载：
+        就是将以上的配置中
+        uri对应不在是一个唯一的地址而是从注册中心中获取的服务id，其实现原来依然是ribbon、先去注册中心获取地址列表，缓存到本地，默认按照轮训的方式去请求服务
+        格式：    uri: lb://服务id
+            spring:
+                gateway:
+                     routes:
+                            - id: user_router #这代表路由对象的唯一标识
+                              uri: lb://USERSERVICE          #http://localhost:8031 #这块代表访问的真正的ip地址,这个配置user用户项目的
+                              predicates:
+                                - Path=/user/**
+
+                            - id: order_router #这代表路由对象的唯一标识
+                              uri: http://localhost:8041 #这块代表访问的真正的ip地址,这个配置order订单项目的
+                              predicates:
+                                - Path=/order/**
 

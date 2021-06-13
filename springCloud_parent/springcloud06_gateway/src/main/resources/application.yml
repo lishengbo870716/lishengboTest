@@ -1,0 +1,22 @@
+server:
+  port: 8060
+spring:
+  application:
+    name: GATEWAY
+  cloud:
+    consul:
+      host: localhost
+      discovery:
+        port: 8500
+    gateway:
+      routes:
+        - id: user_router #这代表路由对象的唯一标识
+#          uri: http://localhost:8031 #这块代表访问的真正的ip地址,这个配置user用户项目的
+          uri: lb://USERSERVICE  #负载均衡的实现，使用服务id去获取服务地址。ribbon
+          predicates:
+            - Path=/user/**
+
+        - id: order_router #这代表路由对象的唯一标识
+          uri: http://localhost:8041 #这块代表访问的真正的ip地址,这个配置order订单项目的
+          predicates:
+            - Path=/order/**
