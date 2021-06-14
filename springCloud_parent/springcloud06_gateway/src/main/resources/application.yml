@@ -20,3 +20,8 @@ spring:
           uri: http://localhost:8041 #这块代表访问的真正的ip地址,这个配置order订单项目的
           predicates:
             - Path=/order/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

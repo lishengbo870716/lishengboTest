@@ -203,4 +203,55 @@ gateway网关组件
                               uri: http://localhost:8041 #这块代表访问的真正的ip地址,这个配置order订单项目的
                               predicates:
                                 - Path=/order/**
+    网关gateway断言与过滤
+        1、断言predicate factories
+            1）、 - Path=/aaa   路径断言
+            2）、 - After=ZonedDateTime  在某个时间段之后有效ZonedDateTime jdk8新增的时间区域字段
+            3）、 - Before=ZonedDateTime  在某个时间段之前有效ZonedDateTime jdk8新增的时间区域字段
+            4）、 - Between=ZonedDateTime,ZonedDateTime  在某个时间段有效ZonedDateTime jdk8新增的时间区域字段
+            5）、 - Cookie=name,bobocai  cookie中必须包含这个键值对
+                  - Cookie=name,[A-Za-z0-9]  支持正则，
+            6）、 - Header=name,bobocai   Header中必须包含这个键值对
+            7）、 - Method=GET  指定请求方式的断言，这个必须是GET请求方式才放行
+        2、过滤器filter 根据规则判断过滤在断言之后
+            内置常用的filters
+                1）、 - AddRequestHeader=X-Request-red,blue   给访问的地址增加请求头
+                2）、 - AddRequestParameter=coler,blue         给访问地址增加参数
+                3）、 - AddResponseHeader=X-Request-red,blue   给返回的页面增加请求头信息
+                4）、 - PrefixPath=/aaa   给请求的地址增加前缀，如请求地址为ccc，那过滤以后的地址就是/aaa/ccc
+                5）、 - StripPrefix=n(2)  从左边起去掉几个请求段，如 - StripPrefix=2 请求地址为aaa/bbb/ccc  那么真正的请求地址过滤后为/ccc
+            自定义过滤器
+                实例：
+                @Configuraction
+                public class CustomerGlobFilter inplements GlobalFilter,Ordered{
+                    @Override
+                    public Mono<Void> filter(ServerWebExchange exch,GatewayFilterChain chain){
+                        log.info("自定义全局filter");
+                        //ServerWebExchange封装了原来的HTTPRequest  +  HTTPResponse两个对象
+
+                        //响应前的过滤处理
+                        Mono<Void> m = chain.filter(exch);
+                        //响应回来的filter处理
+
+                        return m;//这句话就是放行filter继续向下执行
+                    }
+                    //如果有多个过滤器，执行的顺序就在getOrder返回的数字上，数字越小越先执行
+                    @Override
+                    public int getOrder(){
+                     return -1;
+                    }
+                }
+                @Bean
+                public GlobalFilter customerF(){
+                    return new CustomerGlobFilter();
+                }
+    通过网关提供的web端口查看断言与filter都有哪些--------这块展示的时候就可以看到order属性，如果想看过滤器的执行顺序就可以看这个
+        1、访问地址：http://localhost:8060/actuator/gateway/routes
+        2、默认这个路径是关闭状态，必须在配置文件中进行打开才可以
+            management:
+              endpoints:
+                web:
+                  exposure:
+                    include: "*"
+                    web节点后面可以跟很多已经关闭的自带的地址，为了方便不需要一个一个打开直接使用 * 即可，否则许多默认地址想访问就得一一对应的去打开
 
