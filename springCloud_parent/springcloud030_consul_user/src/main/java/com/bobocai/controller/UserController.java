@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 @RestController//这个注解同controller注解一样，只不过RestController相当于给每一个方法上都增加了一个@ResponseBody注解将结果直接以字符串的形式返回了
 @RequestMapping(value = "user")
@@ -93,5 +97,20 @@ public class UserController {
     public String test(){
         return "测试，无路径访问0";
     }
+
+//    public static void main(String[] args) {
+////        System.out.println(new Date().getTime());
+//
+//        TestListVo testListVo = new TestListVo();
+//        testListVo.setName("张三");
+//        List<TestListVo> list = new ArrayList<>();
+//        list.add(testListVo);
+//        TestListVo testListVo1 = list.get(0);
+//        testListVo1.setName("李四");
+//
+//        TestListVo testListVo2 = list.get(0);
+//        System.out.println(testListVo2.getName());
+//
+//    }
 
 }

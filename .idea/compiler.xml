@@ -14,6 +14,7 @@
         <module name="springcloud042_consul_order" />
         <module name="springcloud05_hystrix_ui" />
         <module name="springcloud06_gateway" />
+        <module name="springcloud07_config" />
         <module name="springcloud_common" />
       </profile>
     </annotationProcessing>
@@ -26,6 +27,7 @@
       <module name="springcloud042_consul_order" target="1.8" />
       <module name="springcloud05_hystrix_ui" target="1.8" />
       <module name="springcloud06_gateway" target="1.8" />
+      <module name="springcloud07_config" target="1.8" />
       <module name="springcloud_common" target="1.8" />
       <module name="springCloud_parent" target="1.8" />
     </bytecodeTargetLevel>

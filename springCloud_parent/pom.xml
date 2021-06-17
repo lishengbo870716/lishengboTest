@@ -18,6 +18,7 @@
         <module>springcloud_common</module>
         <module>springcloud05_hystrix_ui</module>
         <module>springcloud06_gateway</module>
+        <module>springcloud07_config</module>
     </modules>
 
 

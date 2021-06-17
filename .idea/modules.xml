@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud042_consul_order/springcloud042_consul_order.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud042_consul_order/springcloud042_consul_order.iml" />
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud05_hystrix_ui/springcloud05_hystrix_ui.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud05_hystrix_ui/springcloud05_hystrix_ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud06_gateway/springcloud06_gateway.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud06_gateway/springcloud06_gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud07_config/springcloud07_config.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud07_config/springcloud07_config.iml" />
       <module fileurl="file://$PROJECT_DIR$/springCloud_parent/springcloud_common/springcloud_common.iml" filepath="$PROJECT_DIR$/springCloud_parent/springcloud_common/springcloud_common.iml" />
     </modules>
   </component>

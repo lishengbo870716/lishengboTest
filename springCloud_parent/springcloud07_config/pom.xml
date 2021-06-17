@@ -9,41 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springcloud030_consul_user</artifactId>
+    <artifactId>springcloud07_config</artifactId>
 
     <dependencies>
-        <!--将公共的包引入-->
-        <dependency>
-            <groupId>com.bobocai</groupId>
-            <artifactId>springcloud_common</artifactId>
-            <version>1.0-RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <!--引入springboot依赖-->
+        <!--springboot启动项-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <!--引入consul依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-consul-discovery</artifactId>
         </dependency>
-        <!--引入consul健康检查组件-->
+        <!--安全检查-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--增加openfeign依赖-->
+        <!--config依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
-        <!--config client 客户端-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
 
     </dependencies>

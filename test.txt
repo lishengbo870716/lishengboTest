@@ -254,4 +254,42 @@ gateway网关组件
                   exposure:
                     include: "*"
                     web节点后面可以跟很多已经关闭的自带的地址，为了方便不需要一个一个打开直接使用 * 即可，否则许多默认地址想访问就得一一对应的去打开
+config配置中心
+    1、创建一个新的项目作为config-server服务端
+        <!--config依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+        配置：
+            spring.application.name=SPRINGCONFIG
+            server.port=8071
+            spring.cloud.consul.port=8500
+            spring.cloud.consul.host=localhost
+            #增加配置中心配置
+            spring.cloud.config.server.git.uri=https://gitee.com/libobo/springcloud_config.git
+            spring.cloud.config.server.git.default-label=master
+            spring.cloud.config.server.git.username=libobo
+            spring.cloud.config.server.git.password=li577227
+    2、其他项目作为config-client客户端增加依赖进行
+        <!--config client 客户端-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+     3、客户端的的配置文件名称必须改为bootstrap.properties,使用原来的application.properties启动会报错
+            配置：
+                    #设置链接config，以后配置信息都可以在gitee上进行维护了
+                    #开启配置中心  开启config的自动发现--去注册中心查找
+                    spring.cloud.config.discovery.enabled=true
+                    #去注册中心找对应id的服务器
+                    spring.cloud.config.discovery.service-id=SPRINGCONFIG
+                    #去哪个分支获取、文件名称、环境（测试、生产、开发）
+                    spring.cloud.config.label=master
+                    spring.cloud.config.name=user
+                    spring.cloud.config.profile=dev
+                    #配置向consul注册的地址
+                    spring.cloud.consul.host=localhost
+                    spring.cloud.consul.port=8500
+            以上几项配置是必须的-------其他的配置可以移动到配置中心去配置--------------------------------------------------
 
